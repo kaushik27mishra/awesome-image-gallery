@@ -24,8 +24,8 @@ function Results(props) {
       });
   }, [page]);
 
-  const handleSubmit = () => {
-    setPage(1);
+  const handleSubmit = (e) => {
+    setPage(2);
     const params = new URLSearchParams();
     params.append("q", query);
     history.push({ search: params.toString() });
@@ -54,35 +54,34 @@ function Results(props) {
     <>
       <main className="pt-6" id="results">
         <div className="container px-5 pt-5 mx-auto mb-12">
-          <div class="box py-6">
-            <div class="box-wrapper">
-              <div class="bg-white rounded flex items-center w-full p-3 shadow-xl border border-gray-400 ">
-                <button
-                  onClick={handleSubmit}
-                  class="outline-none focus:outline-none"
-                >
-                  <svg
-                    class=" w-5 text-gray-600 h-5 cursor-pointer"
-                    fill="none"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                  </svg>
-                </button>
-                <input
-                  type="search"
-                  placeholder="search for images"
-                  value={query}
-                  onChange={(e) => setQuery(e.target.value)}
-                  x-model="q"
-                  class="w-full pl-4 text-sm outline-none focus:outline-none bg-transparent"
-                />
-              </div>
-            </div>
+          <div class="bg-white shadow p-4 flex">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-8 w-8"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="grey"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+              />
+            </svg>
+            <input
+              class="w-full rounded p-2 focus:outline-none"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              type="text"
+              placeholder="Try 'Sunrise'"
+            />
+            <button
+              onClick={handleSubmit}
+              class="bg-blue-500 hover:bg-blue-400 focus:outline-none rounded text-white p-2 pl-4 pr-4"
+            >
+              <p class="font-semibold text-xs">Search</p>
+            </button>
           </div>
           <div className="box-border mx-auto md:masonry before:box-inherit after:box-inherit">
             {images.map((image) => (
