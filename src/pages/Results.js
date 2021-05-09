@@ -37,7 +37,7 @@ function Results(props) {
       .then((res) => {
         const imagesArray = getPhotos(res);
         setImages(imagesArray);
-        setLoading(false);
+        // setLoading(false);
       });
   };
 
@@ -45,8 +45,8 @@ function Results(props) {
     const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
 
     if (clientHeight + scrollTop >= scrollHeight - 5) {
-      setPage((page) => page + 1);
       setLoading(true);
+      setPage((page) => page + 1);
     }
   }, 1000);
 
@@ -102,9 +102,11 @@ function Results(props) {
             ))}
           </div>
           {loading ? (
-            <span class="text-blue-600 opacity-75 top-1/2 my-0 mx-auto block relative w-0 h-0 my-12">
-              <i class="fas fa-circle-notch fa-spin fa-5x"></i>
-            </span>
+            <>
+              <span class="relative text-blue-500 opacity-75 w-full h-0">
+                <i class="flex items-center justify-center fas fa-circle-notch fa-spin fa-5x"></i>
+              </span>
+            </>
           ) : null}
         </div>
       </main>

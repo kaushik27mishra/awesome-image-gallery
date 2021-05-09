@@ -21,8 +21,8 @@ function Home(props) {
     <>
       <section className="flex h-screen" id="landing-page">
         <div className="container flex flex-col mx-auto my-auto">
-          <div className="flex items-center mx-auto">
-            <div className="flex flex-wrap md:mx-full sm:w-full lg:w-4/6 xl:w-3/6 mx-auto">
+          <div className="relative mx-auto">
+            <div className="flex flex-wrap sm:w-full lg:w-4/6 xl:w-3/6 mx-auto">
               <div className="flex flex-wrap md:-m-2 -m-1">
                 <div className="flex flex-wrap w-1/2">
                   <div className="md:p-2 h-32 w-64 p-1 w-1/2">
