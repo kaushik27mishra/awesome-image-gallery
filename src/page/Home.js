@@ -20,29 +20,29 @@ function Home(props) {
   return (
     <>
       <section className="flex h-screen" id="landing-page">
-        <div className="container flex flex-col m-auto">
+        <div className="container flex flex-col mx-auto my-auto">
           <div className="flex items-center mx-auto">
-            <div className="flex flex-wrap w-160">
+            <div className="flex flex-wrap md:mx-full sm:w-full lg:w-4/6 xl:w-3/6 mx-auto">
               <div className="flex flex-wrap md:-m-2 -m-1">
                 <div className="flex flex-wrap w-1/2">
                   <div className="md:p-2 h-32 w-64 p-1 w-1/2">
                     <img
                       alt="gallery"
-                      className="w-full bg-contain h-full object-center block rounded filter blur-sm"
+                      className="w-full bg-contain h-full object-center block rounded filter brightness-50"
                       src={images[0]}
                     />
                   </div>
                   <div className="md:p-2 h-32 w-64 p-1 w-1/2">
                     <img
                       alt="gallery"
-                      className="w-full bg-contain h-full object-center block rounded filter blur-sm"
+                      className="w-full bg-contain h-full object-center block rounded filter brightness-50"
                       src={images[1]}
                     />
                   </div>
                   <div className="md:p-2 h-64 w-128 p-1 w-full">
                     <img
                       alt="gallery"
-                      className="w-full h-full bg-contain object-center block rounded filter blur-sm"
+                      className="w-full h-full bg-contain object-center block rounded filter brightness-50"
                       src={images[2]}
                     />
                   </div>
@@ -51,35 +51,35 @@ function Home(props) {
                   <div className="md:p-2 h-64 w-128 p-1 w-full">
                     <img
                       alt="gallery"
-                      className="w-full h-full bg-contain object-center block rounded filter blur-sm"
+                      className="w-full h-full bg-contain object-center block rounded filter brightness-50"
                       src={images[3]}
                     />
                   </div>
                   <div className="md:p-2 h-32 w-64 p-1 w-1/2">
                     <img
                       alt="gallery"
-                      className="w-full bg-contain h-full object-center block rounded filter blur-sm"
+                      className="w-full bg-contain h-full object-center block rounded filter brightness-50"
                       src={images[4]}
                     />
                   </div>
                   <div className="md:p-2 h-32 w-64 p-1 w-1/2">
                     <img
                       alt="gallery"
-                      className="w-full bg-contain h-full object-center block rounded filter blur-sm"
+                      className="w-full bg-contain h-full object-center block rounded filter brightness-50"
                       src={images[5]}
                     />
                   </div>
                 </div>
               </div>
-            </div>
-            <div className="absolute">
-              <p className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 text-5xl font-black ml-36">
-                Awesome Images
-              </p>
+              <div className="absolute self-center text-center md:ml-40 lg:ml-32 xl:ml-32">
+                <p className="bg-clip-text text-transparent bg-gradient-to-r from-white to-blue-500 text-5xl font-black">
+                  Awesome Gallery
+                </p>
+              </div>
             </div>
           </div>
-          <div className="pt-8 flex items-center mx-auto">
-            <div className="bg-white flex items-center rounded-full shadow-xl w-160">
+          <div className="pt-8 flex mx-auto">
+            <div className="bg-white flex rounded-full shadow-xl">
               <input
                 className="rounded-l-full w-full px-6 text-gray-700 leading-tight focus:outline-none"
                 id="search"

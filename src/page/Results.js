@@ -3,46 +3,107 @@ import axios from "axios";
 import _ from "lodash";
 import { API_KEY } from "../utils/APIclientHome";
 import { getPhotos } from "../utils/getPhotos";
+import { useHistory } from "react-router-dom";
 
 function Results(props) {
-  // const [query, getSearc] = useState("");
+  const queryString = props.location.search.slice(3);
+  const [query, setQuery] = useState(queryString);
+  const [loading, setLoading] = useState(true);
   const [images, setImages] = useState([]);
   const [page, setPage] = useState(1);
-  const queryString = props.location.search.slice(3);
+  const history = useHistory();
 
   useEffect(() => {
     axios
       .get(
-        `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${API_KEY}&text=${queryString}&per_page=20&page=${page}&safe_search=1&content_type=1&format=json&nojsoncallback=1`
+        `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${API_KEY}&text=${query}&per_page=20&page=${page}&safe_search=1&content_type=1&format=json&nojsoncallback=1`
       )
       .then((res) => {
-        console.log("API Called", page);
         const imagesArray = getPhotos(res);
         setImages((old) => [...old, ...imagesArray]);
       });
   }, [page]);
+
+  const handleSubmit = () => {
+    setPage(1);
+    const params = new URLSearchParams();
+    params.append("q", query);
+    history.push({ search: params.toString() });
+
+    axios
+      .get(
+        `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${API_KEY}&text=${query}&per_page=20&page=1&safe_search=1&content_type=1&format=json&nojsoncallback=1`
+      )
+      .then((res) => {
+        const imagesArray = getPhotos(res);
+        setImages(imagesArray);
+        setLoading(false);
+      });
+  };
 
   window.onscroll = _.debounce(() => {
     const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
 
     if (clientHeight + scrollTop >= scrollHeight - 5) {
       setPage((page) => page + 1);
+      setLoading(true);
     }
   }, 1000);
 
   return (
     <>
-      <section id="results">
-        <div></div>
-        {images.map((photo, i) => {
-          return (
-            <div key={i}>
-              <img src={photo} style={{ height: 384, width: 512 }} />
+      <main className="pt-6" id="results">
+        <div className="container px-5 pt-5 mx-auto mb-12">
+          <div class="box py-6">
+            <div class="box-wrapper">
+              <div class="bg-white rounded flex items-center w-full p-3 shadow-xl border border-gray-400 ">
+                <button
+                  onClick={handleSubmit}
+                  class="outline-none focus:outline-none"
+                >
+                  <svg
+                    class=" w-5 text-gray-600 h-5 cursor-pointer"
+                    fill="none"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                  </svg>
+                </button>
+                <input
+                  type="search"
+                  placeholder="search for images"
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                  x-model="q"
+                  class="w-full pl-4 text-sm outline-none focus:outline-none bg-transparent"
+                />
+              </div>
             </div>
-          );
-        })}
-        <div></div>
-      </section>
+          </div>
+          <div className="box-border mx-auto md:masonry before:box-inherit after:box-inherit">
+            {images.map((image) => (
+              <>
+                <div class="py-2 rounded-lg break-inside hover:shadow-xl">
+                  <img
+                    src={image}
+                    className="bg-contain rounded"
+                    alt="gallery"
+                  />
+                </div>
+              </>
+            ))}
+          </div>
+          {loading ? (
+            <span class="text-blue-600 opacity-75 top-1/2 my-0 mx-auto block relative w-0 h-0 my-12">
+              <i class="fas fa-circle-notch fa-spin fa-5x"></i>
+            </span>
+          ) : null}
+        </div>
+      </main>
     </>
   );
 }
