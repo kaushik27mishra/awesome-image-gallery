@@ -53,8 +53,13 @@ function Results(props) {
   return (
     <>
       <main className="pt-6" id="results">
+        <div className="container px-5 pt-5 mx-auto mb-8 flex items-center justify-center whitespace-nowrap">
+          <p className="absolute bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-blue-500 sm:text-5xl text-3xl font-black">
+            Awesome Gallery
+          </p>
+        </div>
         <div className="container px-5 pt-5 mx-auto mb-12">
-          <div class="bg-white shadow p-4 flex">
+          <div class="bg-white shadow-xl p-4 flex">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               class="h-8 w-8"
